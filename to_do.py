@@ -70,3 +70,11 @@ def main():
     else:
         user = users[0]
 
+    while True:
+        print("1. Add task")
+        print("2. View tasks")
+        print("3. Change task")
+        print("4. Delete task")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+    
