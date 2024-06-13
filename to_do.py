@@ -9,3 +9,11 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     tasks = relationship("Task", backref="user")
+
+class Task(Base):
+    __tablename__ = 'tasks'
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    subtasks = relationship("Subtask", backref="task")
+
