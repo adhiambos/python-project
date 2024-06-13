@@ -77,4 +77,60 @@ def main():
         print("4. Delete task")
         print("5. Exit")
         choice = input("Enter your choice: ")
+        if choice == "1":
+            title = input("Enter task title: ")
+            task = add_task(title, user)
+            print("Task added successfully!")
+
+        elif choice == "2":
+            tasks = get_tasks(user)
+            if not tasks:
+                print("No tasks available!")
+            else:
+                for i, task in enumerate(tasks, start=1):
+                    print(f"{i}. {task.title}")
+                    subtasks = get_subtasks(task)
+                    for j, subtask in enumerate(subtasks, start=1):
+                        print(f"  {j}. {subtask.title}")
+
+        elif choice == "3":
+            tasks = get_tasks(user)
+            if not tasks:
+                print("No tasks available to change!")
+            else:
+                for i, task in enumerate(tasks, start=1):
+                    print(f"{i}. {task.title}")
+                task_number = int(input("Enter the task number to change: "))
+                if task_number > 0 and task_number <= len(tasks):
+                    new_title = input("Enter the new task title: ")
+                    task = tasks[task_number - 1]
+                    task.title = new_title
+                    session.commit()
+                    print("Task changed successfully!")
+                else:
+                    print("Invalid task number!")
+
+        elif choice == "4":
+            tasks = get_tasks(user)
+            if not tasks:
+                print("No tasks available to delete!")
+            else:
+                for i, task in enumerate(tasks, start=1):
+                    print(f"{i}. {task.title}")
+                task_number = int(input("Enter the task number to delete: "))
+                if task_number > 0 and task_number <= len(tasks):
+                    task = tasks[task_number - 1]
+                    session.delete(task)
+                    session.commit()
+                    print("Task deleted successfully!")
+                else:
+                    print("Invalid task number!")
+
+        elif choice == "5":
+            print("Exiting the application. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
     
