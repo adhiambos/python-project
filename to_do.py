@@ -23,5 +23,9 @@ class Subtask(Base):
     title = Column(String)
     task_id = Column(Integer, ForeignKey('tasks.id'))
     __table_args__ = (UniqueConstraint('task_id', 'title', name='unique_subtask'),)
+
+engine = create_engine('sqlite:///todo.db')
+Base.metadata.create_all(engine)
+
   
 
