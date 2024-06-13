@@ -60,5 +60,7 @@ def get_users():
 def get_tasks(user):
     return session.query(Task).filter_by(user=user).all()
 
+def get_subtasks(task):
+    return session.query(Subtask).filter_by(task=task).all()
   
 
