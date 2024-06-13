@@ -63,4 +63,10 @@ def get_tasks(user):
 def get_subtasks(task):
     return session.query(Subtask).filter_by(task=task).all()
   
+def main():
+    users = get_users()
+    if not users:
+        user = add_user("Default User")
+    else:
+        user = users[0]
 
