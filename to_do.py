@@ -45,6 +45,15 @@ def add_task(title, user):
     session.commit()
     return task
 
+def add_subtask(title, task):
+    try:
+        subtask = Subtask(title=title, task=task)
+        session.add(subtask)
+        session.commit()
+        return subtask
+    except Exception as e:
+        print(f"Failed to add subtask:{e}")
+        return None
 
 
   
