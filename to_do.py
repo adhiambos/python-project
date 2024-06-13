@@ -57,6 +57,8 @@ def add_subtask(title, task):
 def get_users():
     return session.query(User).all()
 
+def get_tasks(user):
+    return session.query(Task).filter_by(user=user).all()
 
   
 
