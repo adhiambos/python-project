@@ -133,4 +133,7 @@ def main():
         else:
             print("Invalid choice. Please choose a valid option.")
 
+if __name__ == "__main__":
+    main()
+
     
