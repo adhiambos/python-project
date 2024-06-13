@@ -17,3 +17,11 @@ class Task(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     subtasks = relationship("Subtask", backref="task")
 
+class Subtask(Base):
+    __tablename__ = 'subtasks'
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    task_id = Column(Integer, ForeignKey('tasks.id'))
+    __table_args__ = (UniqueConstraint('task_id', 'title', name='unique_subtask'),)
+  
+
