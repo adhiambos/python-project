@@ -3,27 +3,27 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
 Base = declarative_base()
-
+# Define the User model with relationships to other models
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String)
     tasks = relationship("Task", backref="user")
-
+# Define the Task model with relationships to other models
 class Task(Base):
     __tablename__ = 'tasks'
     id = Column(Integer, primary_key=True)
     title = Column(String)
     user_id = Column(Integer, ForeignKey('users.id'))
     subtasks = relationship("Subtask", backref="task")
-
+# Define the Subtask model with relationships to other models
 class Subtask(Base):
     __tablename__ = 'subtasks'
     id = Column(Integer, primary_key=True)
     title = Column(String)
     task_id = Column(Integer, ForeignKey('tasks.id'))
     __table_args__ = (UniqueConstraint('task_id', 'title', name='unique_subtask'),)
-
+# Create the engine that will interact with the database
 engine = create_engine('sqlite:///todo.db')
 Base.metadata.create_all(engine)
 
@@ -32,7 +32,7 @@ session = Session()
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
+# Functions to perform operations
 def add_user(name):
     user = User(name=name)
     session.add(user)
@@ -62,7 +62,7 @@ def get_tasks(user):
 
 def get_subtasks(task):
     return session.query(Subtask).filter_by(task=task).all()
-  
+# Main function to run the application  
 def main():
     users = get_users()
     if not users:
