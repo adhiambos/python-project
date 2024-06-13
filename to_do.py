@@ -27,5 +27,8 @@ class Subtask(Base):
 engine = create_engine('sqlite:///todo.db')
 Base.metadata.create_all(engine)
 
+Session = sessionmaker(bind=engine)
+session = Session()
+
   
 
