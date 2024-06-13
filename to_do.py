@@ -30,5 +30,16 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+Session = sessionmaker(bind=engine)
+session = Session()
+
+def add_user(name):
+    user = User(name=name)
+    session.add(user)
+    session.commit()
+    return user
+
+
+
   
 
