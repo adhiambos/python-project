@@ -39,6 +39,12 @@ def add_user(name):
     session.commit()
     return user
 
+def add_task(title, user):
+    task = Task(title=title, user=user)
+    session.add(task)
+    session.commit()
+    return task
+
 
 
   
