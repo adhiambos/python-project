@@ -54,6 +54,8 @@ def add_subtask(title, task):
     except Exception as e:
         print(f"Failed to add subtask:{e}")
         return None
+def get_users():
+    return session.query(User).all()
 
 
   
